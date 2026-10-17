@@ -17,9 +17,17 @@ function App() {
   const [menu, setMenu] = useState(false)
   const [active, setActive] = useState(0)
   const [scrolled, setScrolled] = useState(() => window.scrollY > 80)
+  const [brandOnLight, setBrandOnLight] = useState(false)
   useEffect(() => {
     const key = (event: KeyboardEvent) => { if (event.key === 'Escape') setMenu(false) }
-    const onScroll = () => setScrolled(window.scrollY > 80)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 80)
+      setBrandOnLight(['sobre', 'espaco'].some(id => {
+        const bounds = document.getElementById(id)?.getBoundingClientRect()
+        return bounds ? bounds.top <= 40 && bounds.bottom > 40 : false
+      }))
+    }
+    onScroll()
     window.addEventListener('keydown', key)
     window.addEventListener('scroll', onScroll, { passive: true })
     const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible') }), { threshold: .13 })
@@ -29,7 +37,7 @@ function App() {
   return <>
     <a className="skip" href="#conteudo">Pular para o conteúdo</a>
     <header className="header">
-      <a className={`brand${scrolled ? ' brand-compact' : ''}`} href="#inicio" aria-label="Lúmina Odontologia, início"><span className="brand-mark">L<span>·</span></span><span className="brand-name">LÚMINA<small>ODONTOLOGIA</small></span></a>
+      <a className={`brand${scrolled ? ' brand-compact' : ''}${brandOnLight && !menu ? ' brand-on-light' : ''}`} href="#inicio" aria-label="Lúmina Odontologia, início"><span className="brand-mark">L<span>·</span></span><span className="brand-name">LÚMINA<small>ODONTOLOGIA</small></span></a>
       <button className="menu-toggle" aria-expanded={menu} aria-controls="navigation" onClick={() => setMenu(!menu)}>{menu ? <X size={21}/> : <Menu size={21}/>}<span>{menu ? 'FECHAR' : 'MENU'}</span></button>
       <a className="header-link" href="#contato">Vamos conversar <ArrowUpRight size={16}/></a>
       <nav id="navigation" className={menu ? 'navigation open' : 'navigation'} aria-label="Navegação principal" hidden={!menu}>

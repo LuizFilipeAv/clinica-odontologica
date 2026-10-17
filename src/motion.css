@@ -4,8 +4,9 @@
 .header-link { margin-left: auto; }
 .brand-mark { transition: font-size .55s var(--motion-ease), transform .55s var(--motion-ease); }
 .brand-name { max-width: 160px; opacity: 1; transform: translateX(0); transition: opacity .3s var(--motion-ease), transform .5s var(--motion-ease), max-width .5s var(--motion-ease); }
-.brand-compact { gap: 0; padding: 8px 12px; background: var(--dark); }
+.brand-compact { gap: 0; }
 .brand-compact .brand-mark { font-size: 56px; }
+.brand-on-light .brand-mark { color: var(--ink); }
 .brand-compact .brand-name { max-width: 0; opacity: 0; transform: translateX(-16px); overflow: hidden; pointer-events: none; }
 .line-link { position: relative; border-bottom: 0; gap: 22px; }
 .line-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: var(--gold); transform-origin: left; transition: transform .45s var(--motion-ease); }
@@ -13,7 +14,7 @@
 .line-link:hover, .line-link:focus-visible { gap: 22px; }
 .line-link:hover span, .line-link:focus-visible span { transform: scale(1.08); }
 .line-link:hover::after, .line-link:focus-visible::after { transform: scaleX(.6); }
-.portrait { animation: none; }
+.portrait { animation: none; background: transparent; }
 .portrait img { animation: image-settle 1.15s cubic-bezier(.16, 1, .3, 1) both; }
 .portrait::before, .portrait::after, .intro-image.is-visible::before, .intro-image.is-visible::after, .space-image.is-visible::before, .space-image.is-visible::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; transform: scaleX(0); transform-origin: right; animation: panel-wipe 1.25s cubic-bezier(.76, 0, .24, 1) both; }
 .portrait::before, .intro-image.is-visible::before, .space-image.is-visible::before { background: #d3d1ce; }
@@ -26,6 +27,6 @@
 .intro-image span { z-index: 3; }
 .intro-image.is-visible img, .space-image.is-visible img { animation: image-settle 1.2s cubic-bezier(.16, 1, .3, 1) both; }
 @keyframes panel-wipe { 0% { transform: scaleX(0); transform-origin: left; } 42% { transform: scaleX(1); transform-origin: left; } 43% { transform: scaleX(1); transform-origin: right; } 100% { transform: scaleX(0); transform-origin: right; } }
-@keyframes image-settle { from { transform: scale(1.04); } to { transform: scale(1); } }
-@media (max-width: 650px) { .brand { left: 22px; top: 18px; } .brand-compact { padding: 7px 10px; } .brand-compact .brand-mark { font-size: 45px; } }
-@media (prefers-reduced-motion: reduce) { .brand, .brand-mark, .brand-name, .line-link::after, .line-link span { transition: none; } .portrait::before, .portrait::after, .intro-image.is-visible::before, .intro-image.is-visible::after, .space-image.is-visible::before, .space-image.is-visible::after { animation: none; display: none; } .portrait img, .intro-image.is-visible img, .space-image.is-visible img { animation: none; } }
+@keyframes image-settle { 0%, 42% { clip-path: inset(0 100% 0 0); transform: scale(1.04); } 100% { clip-path: inset(0); transform: scale(1); } }
+@media (max-width: 650px) { .brand { left: 22px; top: 18px; } .brand-compact .brand-mark { font-size: 45px; } }
+@media (prefers-reduced-motion: reduce) { .brand, .brand-mark, .brand-name, .line-link::after, .line-link span { transition: none; } .portrait::before, .portrait::after, .intro-image.is-visible::before, .intro-image.is-visible::after, .space-image.is-visible::before, .space-image.is-visible::after { animation: none; display: none; } .portrait img, .intro-image.is-visible img, .space-image.is-visible img { animation: none; clip-path: none; transform: none; } }
