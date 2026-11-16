@@ -1,0 +1,90 @@
+.footer {
+  background: var(--teal-night);
+  color: var(--cream);
+  padding: var(--section) 0 2rem;
+}
+
+/* Wordmark link. The compound selector beats the Logo's own .logo font-size. */
+.mark {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  margin-bottom: clamp(3rem, 2rem + 4vw, 5rem);
+  text-decoration: none;
+}
+.mark .logo {
+  font-size: clamp(5rem, 18vw, 15rem);
+}
+
+.grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.note {
+  max-width: 38ch;
+  font-size: var(--step-0);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.nav ul {
+  display: grid;
+  padding: 0;
+  list-style: none;
+}
+.nav li { display: flex; }
+
+/* Animated underline: the background grows from left to right on hover */
+.link {
+  display: inline-block;
+  padding-block: 0.6rem;
+  color: var(--cream);
+  text-decoration: none;
+  background-image: linear-gradient(var(--coral), var(--coral));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition: background-size var(--dur) var(--ease-out);
+}
+.link:hover,
+.link:focus-visible {
+  background-size: 100% 2px;
+}
+
+.aside {
+  display: grid;
+  justify-items: start;
+  gap: 0.75rem;
+}
+
+.top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 44px;
+  color: var(--cream);
+  text-decoration: none;
+}
+.top svg {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--dur) var(--ease-back);
+}
+.top:hover svg { transform: translateY(-3px); }
+
+.bottom {
+  margin-top: clamp(3rem, 2rem + 3vw, 4.5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line-on-teal);
+  font-size: var(--step--1);
+  color: rgb(243 238 232 / 0.7);
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    align-items: start;
+  }
+}
