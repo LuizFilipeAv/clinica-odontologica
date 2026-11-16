@@ -6,7 +6,7 @@
   pointer-events: none;
 }
 :global(.js:not(.intro-seen)) .intro { display: grid; }
-.intro__logo { font-size: clamp(5rem, 19vw, 13rem); }
+.intro__logo { font-size: clamp(4rem, 13vw, 9rem); }
 
 /* ---------- Hero ---------- */
 .hero {

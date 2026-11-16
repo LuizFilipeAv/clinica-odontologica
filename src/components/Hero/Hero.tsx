@@ -20,19 +20,19 @@ const redraw = (svgs: Element[]) => {
   requestAnimationFrame(() => requestAnimationFrame(() => svgs.forEach((m) => m.setAttribute('data-inview', ''))));
 };
 
-/** Builds the logo's entrance on a timeline: face rises, depth extrudes, smile draws. */
-function logoIn(tl: gsap.core.Timeline, logo: Element, at: gsap.Position = 0) {
-  const face = logo.querySelector('.logo__face');
+/**
+ * The intro mark's signature beat (the petshop's "ears pop" equivalent): the extrusion
+ * springs out from behind the letters while the smile swash draws underneath.
+ */
+function logoPop(tl: gsap.core.Timeline, logo: Element, at: gsap.Position) {
   const depth = logo.querySelectorAll('.logo__depth');
   const smile = logo.querySelectorAll<SVGPathElement>('.logo__smile path');
   const tag = logo.querySelector('.logo__tag');
   const d = parseFloat(getComputedStyle(logo).fontSize) * 0.085;
   smile.forEach((p) => { const len = p.getTotalLength(); gsap.set(p, { strokeDasharray: len, strokeDashoffset: len }); });
-  tl.from(face, { yPercent: 35, opacity: 0, duration: 0.8 }, at)
-    .from(depth, { x: -d, y: d, duration: 0.7, ease: 'expo.out' }, '>-0.35')
-    .to(smile, { strokeDashoffset: 0, duration: 0.8, ease: 'power3.inOut', stagger: 0.04 }, '<0.05');
-  if (tag) tl.from(tag, { opacity: 0, y: 8, duration: 0.5 }, '<0.3');
-  return tl;
+  tl.from(depth, { x: -d, y: d, duration: 0.5, ease: 'back.out(3)' }, at)
+    .to(smile, { strokeDashoffset: 0, duration: 0.55, ease: 'power3.inOut', stagger: 0.04 }, '<0.06');
+  if (tag) tl.from(tag, { opacity: 0, y: 6, duration: 0.4 }, '<0.2');
 }
 
 export default function Hero() {
@@ -47,7 +47,7 @@ export default function Hero() {
       const reduced = prefersReduced();
       const q = gsap.utils.selector(root);
       const mark = q('[data-hero-mark]')[0];
-      const logo = mark.querySelector('.logo')!;
+      const markInner = q('[data-hero-mark-inner]')[0];
       const arch = q('[data-hero-arch]')[0];
       const extras = q('[data-hero-extra]');
       const ui = q('[data-hero-ui]');
@@ -57,26 +57,31 @@ export default function Hero() {
       if ((reduced || !firstVisit) && intro.current) intro.current.style.display = 'none';
       if (reduced) { redraw(marks); return; }
 
-      /* ---------- Entrance ---------- */
+      /* ---------- Entrance (same choreography as the Bigode petshop) ----------
+         1. teal screen: the logo rises in, its extrusion pops and the smile draws
+         2. the screen wipes upward like a curtain
+         3. underneath, the portrait settles in while the giant wordmark rises through a mask
+         4. controls follow in a short stagger, the strokes draw */
       const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-      gsap.set(arch, { yPercent: 18, clipPath: 'inset(100% 0% 0% 0% round 999px 999px 0px 0px)' });
+      gsap.set(markInner, { yPercent: 100, clipPath: 'inset(0% 0% 100% 0%)' });
+      gsap.set(arch, { yPercent: 6, scale: 1.04, opacity: 0 });
       gsap.set(extras, { scale: 0.6, opacity: 0 });
-      gsap.set(ui, { y: 28, opacity: 0 });
+      gsap.set(ui, { y: 30, opacity: 0 });
 
       if (firstVisit && intro.current) {
         try { sessionStorage.setItem('alva-intro', '1'); } catch { /* private mode */ }
         const ov = intro.current;
+        const logo = ov.querySelector('.logo')!;
         tl.add(() => getLenis()?.stop());
-        logoIn(tl, ov.querySelector('.logo')!, 0.15);
-        tl.to(ov, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.9, ease: 'expo.inOut' }, '+=0.25')
+        tl.from(logo, { yPercent: 40, opacity: 0, duration: 0.6 });
+        logoPop(tl, logo, '<0.15');
+        tl.to(ov, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.8, ease: 'expo.inOut' }, '+=0.15')
           .add(() => { ov.style.display = 'none'; getLenis()?.start(); });
-        logoIn(tl, logo, '-=0.55');
-      } else {
-        logoIn(tl, logo, 0.1);
       }
-      tl.to(arch, { yPercent: 0, clipPath: 'inset(0% 0% 0% 0% round 999px 999px 0px 0px)', duration: 1.3 }, '<0.1')
-        .to(extras, { scale: 1, opacity: 1, duration: 0.7, ease: 'back.out(1.6)', stagger: 0.08 }, '<0.55')
-        .to(ui, { y: 0, opacity: 1, duration: 0.8, stagger: 0.08 }, '<0.1')
+      tl.to(arch, { yPercent: 0, scale: 1, opacity: 1, duration: 1.2 }, firstVisit ? '-=0.45' : 0)
+        .to(markInner, { yPercent: 0, clipPath: 'inset(-20% -10% -30% -10%)', duration: 1 }, '<0.1')
+        .to(ui, { y: 0, opacity: 1, duration: 0.8, stagger: 0.08 }, '<0.3')
+        .to(extras, { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(1.8)' }, '<0.1')
         .add(() => redraw(marks), '<');
 
       /* ---------- Scroll: the card settles back, the wordmark lifts away ---------- */
@@ -133,7 +138,9 @@ export default function Hero() {
           <h1 id="hero-title" className="visually-hidden">Alva Odontologia, clínica odontológica para toda a família</h1>
 
           <div className={s.mark} data-hero-mark="">
-            <Logo variant="mark" className={s.mark__logo} />
+            <div data-hero-mark-inner="">
+              <Logo variant="mark" className={s.mark__logo} />
+            </div>
           </div>
 
           <div className={s.stage} data-hero-stage="">
