@@ -103,10 +103,10 @@ html { scrollbar-color: var(--teal) var(--cream); caret-color: var(--coral); }
 .display {
   font-family: var(--font-display);
   font-weight: 750;
-  font-stretch: 88%;
+  font-stretch: 90%;
   font-size: var(--step-4);
-  line-height: 0.94;
-  letter-spacing: -0.035em;
+  line-height: 0.95;
+  letter-spacing: -0.022em;
 }
 .display em { font-style: normal; color: var(--coral-deep); }
 .on-teal .display em, .display.on-teal em { color: var(--coral); }
@@ -152,9 +152,11 @@ html { scrollbar-color: var(--teal) var(--cream); caret-color: var(--coral); }
 .js [data-reveal='scale']:not([data-inview]) { transform: scale(0.93); }
 .js [data-reveal='clip']:not([data-inview]) { opacity: 1; clip-path: inset(16% 16% 16% 16% round var(--radius-l)); }
 .js [data-reveal='clip'] { clip-path: inset(0 0 0 0 round var(--radius-l)); }
-/* Arch reveal: the photo rises inside its tooth-arch frame */
-.js [data-reveal='arch']:not([data-inview]) { opacity: 1; clip-path: inset(100% 0 0 0 round 999px 999px 0 0); }
-.js [data-reveal='arch'] { clip-path: inset(0 0 0 0 round 999px 999px 0 0); }
+/* Arch reveal: the photo rises inside its tooth-arch frame. The clip lives on the children so the
+   observed frame keeps its full box (IntersectionObserver counts a clipped target as hidden). */
+.js [data-reveal='arch']:not([data-inview]) { opacity: 1; }
+[data-reveal='arch'] > * { transition: clip-path 1.2s var(--ease-out), transform 1.4s var(--ease-out); }
+.js [data-reveal='arch']:not([data-inview]) > * { clip-path: inset(100% 0 0 0); transform: scale(1.12); }
 
 /* Split headings: words rise from a mask */
 .split-word { display: inline-block; overflow: clip; overflow-clip-margin: 0.14em; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
