@@ -85,9 +85,12 @@ export default function Journey() {
       const sync = (p: number) =>
         nodes.forEach((n, i) => n.classList.toggle(styles.on, p >= THRESHOLDS[i] - 0.02));
 
-      gsap.set(paths, { strokeDashoffset: 1 });
-      gsap.to(paths, {
-        strokeDashoffset: 0,
+      // The thread runs top→bottom, so a vertical clip reveals it exactly like a draw-on
+      // (dash tricks break with non-scaling strokes on a stretched viewBox).
+      const svgs = paths.map((path) => path.ownerSVGElement!);
+      gsap.set(svgs, { '--reveal': '100%' });
+      gsap.to(svgs, {
+        '--reveal': '0%',
         ease: 'none',
         scrollTrigger: {
           trigger: el,
@@ -118,11 +121,11 @@ export default function Journey() {
         <div className={styles.track}>
           <svg className={`${styles.thread} ${styles.threadDesk}`} viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
             <path d={DESKTOP_PATH} className={styles.rail} />
-            <path d={DESKTOP_PATH} className={styles.line} pathLength={1} data-thread />
+            <path d={DESKTOP_PATH} className={styles.line} data-thread />
           </svg>
           <svg className={`${styles.thread} ${styles.threadMob}`} viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
             <path d={MOBILE_PATH} className={styles.rail} />
-            <path d={MOBILE_PATH} className={styles.line} pathLength={1} data-thread />
+            <path d={MOBILE_PATH} className={styles.line} data-thread />
           </svg>
 
           <ol className={styles.steps} role="list">

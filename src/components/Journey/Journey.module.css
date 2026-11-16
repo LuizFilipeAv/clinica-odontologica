@@ -33,7 +33,7 @@
   vector-effect: non-scaling-stroke;
 }
 .rail { stroke: var(--teal); stroke-opacity: 0.25; stroke-width: 2; stroke-dasharray: 2 9; }
-.line { stroke: var(--teal); stroke-width: 3; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.line { stroke: var(--teal); stroke-width: 3; clip-path: inset(0 0 var(--reveal, 0%) 0); }
 
 .steps {
   position: relative;
@@ -87,7 +87,12 @@
   .threadDesk { display: block; }
   .steps { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .step { padding: 1.5rem 0; }
-  .node { left: 50%; width: 26px; height: 26px; margin: -13px 0 0 -13px; }
+  .node { width: 26px; height: 26px; margin: -13px 0 0 -13px; }
+  /* every step owns a row, so the four nodes land on the thread at 12.5/37.5/62.5/87.5% */
+  .step:nth-child(1) { grid-row: 1; } .step:nth-child(2) { grid-row: 2; }
+  .step:nth-child(3) { grid-row: 3; } .step:nth-child(4) { grid-row: 4; }
+  .step:nth-child(odd) .node { left: 100%; }
+  .step:nth-child(even) .node { left: 0; }
 
   /* odd steps sit left of the thread, even steps right */
   .step:nth-child(odd) { grid-column: 1; justify-content: flex-end; padding-right: clamp(3rem, 2rem + 4vw, 6rem); text-align: right; }
