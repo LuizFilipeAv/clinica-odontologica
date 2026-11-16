@@ -146,13 +146,15 @@
 }
 
 @media (max-width: 700px) {
-  .hero { --arch-h: calc((100svh - 2 * var(--gutter)) * 0.5); }
-  .mark { top: 6rem; }
+  /* the arch stops above the stacked controls so the smile is never covered */
+  .hero { --ui-h: 172px; --arch-h: min(calc(100svh - 2 * var(--gutter) - var(--ui-h) - 15rem), 128vw); }
+  .mark { top: 5.25rem; }
+  .stage { padding-bottom: var(--ui-h); }
+  .arch { border-radius: 999px 999px var(--radius-m) var(--radius-m); }
   .mark__logo { font-size: 30vw; }
   .ui { flex-direction: column; align-items: stretch; }
   .pill { max-width: none; }
   .switch { order: -1; align-self: center; }
-  .stage { padding-bottom: 0; }
   .seal { width: 76px; left: calc(50% + var(--arch-w) * 0.3); bottom: calc(var(--arch-h) * 0.62); }
   .loop { display: none; }
   .shine { width: 48px; }

@@ -34,6 +34,9 @@
   padding-bottom: 0.2em;
 }
 .logoSizer { display: block; visibility: hidden; }
+/* Over the hero the giant wordmark is the logo; the small one arrives with the pill */
+.brand { transition: opacity var(--dur) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+.header:not(.pill):not(.open) .brand:not(:focus-visible) { opacity: 0; transform: translateY(-10px) scale(0.9); pointer-events: none; }
 .logoLayer {
   position: absolute; inset: 0 auto auto 0;
   opacity: 1; transition: opacity var(--dur) linear;
