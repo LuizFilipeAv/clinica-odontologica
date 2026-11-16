@@ -1,0 +1,140 @@
+.header {
+  position: fixed; inset: 0 0 auto; z-index: 50;
+  padding: var(--gutter);
+  pointer-events: none;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.hidden { transform: translateY(-120%); }
+
+.bar {
+  pointer-events: auto;
+  position: relative;
+  display: grid; grid-template-columns: auto 1fr; align-items: center;
+  width: min(100%, var(--max)); margin-inline: auto;
+  padding: 0.5rem 0.5rem 0.5rem 1.25rem;
+  border-radius: 999px;
+  background-color: rgb(250 247 243 / 0);
+  box-shadow: 0 0 0 0 rgb(10 52 49 / 0);
+  transform: translateY(0);
+  transition:
+    background-color var(--dur) linear,
+    box-shadow var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+.pill .bar {
+  background-color: rgb(250 247 243 / 0.92);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(0.25rem);
+}
+
+/* ---------- Brand: two stacked logos crossfade between tones ---------- */
+.brand {
+  position: relative; justify-self: start; display: block;
+  font-size: 1.8rem; line-height: 1; text-decoration: none;
+  padding-bottom: 0.2em;
+}
+.logoSizer { display: block; visibility: hidden; }
+/* Over the hero the giant wordmark is the logo; the small one arrives with the pill */
+.brand { transition: opacity var(--dur) var(--ease-out), transform var(--dur-slow) var(--ease-out); }
+.header:not(.pill):not(.open) .brand:not(:focus-visible) { opacity: 0; transform: translateY(-10px) scale(0.9); pointer-events: none; }
+.logoLayer {
+  position: absolute; inset: 0 auto auto 0;
+  opacity: 1; transition: opacity var(--dur) linear;
+}
+.logoOff { opacity: 0; }
+
+/* ---------- Desktop nav ---------- */
+.nav { display: none; }
+.nav ul { position: relative; display: flex; gap: 0.15rem; padding: 0; list-style: none; }
+.nav a {
+  position: relative; z-index: 1; display: flex; align-items: center;
+  min-height: 44px; padding: 0 1rem;
+  font-size: var(--step--1); font-weight: 600; text-decoration: none;
+  color: var(--cream);
+  transition: color var(--dur) linear;
+}
+.pill .nav a { color: var(--ink); }
+.highlight {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-color: rgb(243 238 232 / 0.18);
+  clip-path: inset(0 50% 0 50% round 999px);
+  opacity: 0;
+  transition: clip-path var(--dur-slow) var(--ease-out), opacity var(--dur-fast) linear, background-color var(--dur) linear;
+}
+.pill .highlight { background-color: var(--teal-mist); }
+
+/* ---------- Right cluster ---------- */
+.end { display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; }
+.cta { display: none; font-size: var(--step--1); }
+
+.toggle {
+  display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  background-color: rgb(243 238 232 / 0.18); color: var(--cream);
+  transition: background-color var(--dur) linear, transform var(--dur) var(--ease-back);
+}
+.pill .toggle { background-color: var(--teal); }
+.open .toggle { background-color: rgb(243 238 232 / 0.18); }
+.toggle:active { transform: scale(0.92); }
+.lines { position: relative; display: block; width: 20px; height: 12px; }
+.lines i {
+  position: absolute; left: 0; right: 0; height: 2px; border-radius: 2px; background: currentColor;
+  transition: transform var(--dur) var(--ease-out);
+}
+.lines i:first-child { top: 1px; }
+.lines i:last-child { bottom: 1px; }
+.toggle[aria-expanded='true'] .lines i:first-child { transform: translateY(4px) rotate(45deg); }
+.toggle[aria-expanded='true'] .lines i:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+/* ---------- Mobile overlay ---------- */
+.menu {
+  position: fixed; inset: 0; z-index: 45;
+  display: flex; flex-direction: column;
+  padding: calc(var(--gutter) + 5rem) var(--gutter) var(--gutter);
+  overflow-y: auto; overscroll-behavior: contain;
+  background-color: var(--teal); color: var(--cream);
+  visibility: hidden;
+  clip-path: circle(0% at calc(100% - var(--gutter) - 24px) calc(var(--gutter) + 0.75rem + 24px));
+  transition: clip-path 650ms var(--ease-in-out), visibility 0s linear 650ms;
+}
+.menuOpen {
+  visibility: visible;
+  clip-path: circle(150% at calc(100% - var(--gutter) - 24px) calc(var(--gutter) + 0.75rem + 24px));
+  transition: clip-path 650ms var(--ease-in-out), visibility 0s;
+}
+.menuList { display: grid; gap: 0.25rem; padding: 0; margin: auto 0; list-style: none; }
+.menuList li { overflow: clip; }
+.menuList a,
+.menuFoot > * {
+  opacity: 0; transform: translate3d(0, 100%, 0);
+  transition: transform 300ms var(--ease-out), opacity 200ms linear;
+}
+.menuList a {
+  display: inline-block; min-height: 44px;
+  font-family: var(--font-display); font-weight: 750; font-stretch: 88%;
+  font-size: var(--step-3); line-height: 1.05; letter-spacing: -0.03em;
+  text-decoration: none; color: var(--cream);
+}
+.menuList a:hover { color: var(--coral); }
+.menuOpen .menuList a,
+.menuOpen .menuFoot > * {
+  opacity: 1; transform: none;
+  transition:
+    transform 800ms var(--ease-out) calc(var(--i, 0) * 70ms + 220ms),
+    opacity 500ms linear calc(var(--i, 0) * 70ms + 220ms);
+}
+.menuFoot { display: grid; gap: 1.25rem; justify-items: start; padding-top: 2rem; }
+.menuFoot > * { transform: translate3d(0, 24px, 0); }
+.note { margin: 0; font-size: var(--step--1); color: var(--cream); }
+.menuOpen .menuFoot > .note { opacity: 0.7; }
+
+@media (min-width: 960px) {
+  .bar { grid-template-columns: 1fr auto 1fr; }
+  .brand { font-size: 2.1rem; }
+  .nav { display: block; }
+  .cta { display: inline-flex; }
+  .toggle { display: none; }
+  .menu { display: none; }
+}
+@media (max-width: 959.98px) {
+  .end { justify-self: end; }
+}

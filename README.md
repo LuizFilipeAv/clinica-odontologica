@@ -1,6 +1,8 @@
-# Lúmina Odontologia
+# Alva Odontologia
 
-Site de portfólio para uma clínica odontológica fictícia, desenvolvido com React, TypeScript e Vite. Os serviços e o espaço são demonstrativos; não existe agendamento nem contato real.
+Site de portfólio para uma clínica odontológica **fictícia**. Os serviços, o espaço e o agendamento são demonstrativos; não existe contato nem atendimento real.
+
+**Stack:** Vite, React 19, TypeScript, GSAP (ScrollTrigger) e Lenis.
 
 ## Executar
 
@@ -9,6 +11,10 @@ Site de portfólio para uma clínica odontológica fictícia, desenvolvido com R
 ```bash
 npm install
 npm run dev
+npm run build
 ```
 
-Para verificar a compilação de produção, execute `npm run build`. As imagens foram fornecidas pelo usuário; os originais estão em `assets/originais` e as versões otimizadas em `public/images`.
+## Documentação
+
+- [docs/briefing.md](docs/briefing.md): marca, paleta, motion e prompts de imagem.
+- [docs/conventions.md](docs/conventions.md): tokens, componentes e convenções de código.

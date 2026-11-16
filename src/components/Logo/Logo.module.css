@@ -1,0 +1,74 @@
+.logo {
+  --d: 0.085em; /* extrusion depth, toward the top-right */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  font-size: 4rem;
+  user-select: none;
+}
+.on-teal { --logo-face: var(--cream); --logo-deep: var(--teal-night); --logo-hatch: rgb(243 238 232 / 0.55); --logo-tag: var(--cream); }
+.on-light { --logo-face: var(--teal); --logo-deep: var(--teal-night); --logo-hatch: rgb(214 230 225 / 0.7); --logo-tag: var(--teal-deep); }
+
+.word {
+  display: inline-grid;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 100%;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  padding: var(--d) var(--d) 0 0; /* room for the extrusion */
+}
+.word > span { grid-area: 1 / 1; padding-inline: 0.04em; }
+
+/* Solid depth: a stacked text-shadow walking diagonally up-right */
+.depth {
+  color: var(--logo-deep);
+  -webkit-text-stroke: 0.05em var(--logo-deep);
+  text-shadow:
+    0.006em -0.006em 0 var(--logo-deep), 0.012em -0.012em 0 var(--logo-deep),
+    0.018em -0.018em 0 var(--logo-deep), 0.024em -0.024em 0 var(--logo-deep),
+    0.03em -0.03em 0 var(--logo-deep), 0.036em -0.036em 0 var(--logo-deep),
+    0.042em -0.042em 0 var(--logo-deep), 0.048em -0.048em 0 var(--logo-deep),
+    0.054em -0.054em 0 var(--logo-deep), 0.06em -0.06em 0 var(--logo-deep),
+    0.066em -0.066em 0 var(--logo-deep), 0.072em -0.072em 0 var(--logo-deep),
+    0.078em -0.078em 0 var(--logo-deep), var(--d) calc(var(--d) * -1) 0 var(--logo-deep);
+}
+/* Hatch lines on the extruded faces, like engraved shading */
+.hatch {
+  color: transparent;
+  background: repeating-linear-gradient(-48deg, var(--logo-hatch) 0 0.012em, transparent 0.012em 0.05em);
+  -webkit-background-clip: text;
+  background-clip: text;
+  transform: translate(calc(var(--d) * 0.62), calc(var(--d) * -0.62));
+}
+.face {
+  position: relative;
+  color: var(--logo-face);
+  -webkit-text-stroke: 0.028em var(--logo-deep);
+  paint-order: stroke fill;
+}
+
+.smile {
+  width: 1.62em;
+  height: auto;
+  margin-top: -0.13em;
+  margin-left: -0.1em;
+  overflow: visible;
+  position: relative;
+}
+.smile path { stroke-linecap: round; }
+.smileDepth { stroke: var(--logo-deep); stroke-width: 16; transform: translate(5px, -5px); }
+.smileLine { stroke: var(--logo-deep); stroke-width: 16; }
+.smileFace { stroke: var(--logo-face); stroke-width: 9; }
+
+.tag {
+  margin-top: 0.06em;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.13em;
+  letter-spacing: 0.34em;
+  margin-right: -0.34em; /* optically recentre the tracked word */
+  text-transform: uppercase;
+  color: var(--logo-tag);
+}

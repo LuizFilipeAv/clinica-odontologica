@@ -1,52 +1,238 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-17T00:00:00Z",
-  "title": "Design System: Lúmina Odontologia",
+  "generatedAt": "2026-11-15T00:00:00Z",
+  "title": "Design System: Alva Odontologia",
   "extensions": {
     "colorMeta": {
-      "grafite": { "role": "neutral", "displayName": "Grafite" },
-      "creme": { "role": "neutral", "displayName": "Creme" },
-      "areia": { "role": "primary", "displayName": "Areia quente" },
-      "tinta": { "role": "neutral", "displayName": "Tinta" },
-      "cinza": { "role": "neutral", "displayName": "Cinza" }
+      "teal": {
+        "role": "primary",
+        "displayName": "Teal"
+      },
+      "teal-deep": {
+        "role": "primary",
+        "displayName": "Teal profundo"
+      },
+      "teal-night": {
+        "role": "primary",
+        "displayName": "Teal noite"
+      },
+      "teal-soft": {
+        "role": "primary",
+        "displayName": "Teal suave"
+      },
+      "teal-mist": {
+        "role": "primary",
+        "displayName": "Teal névoa"
+      },
+      "cream": {
+        "role": "secondary",
+        "displayName": "Creme"
+      },
+      "cream-deep": {
+        "role": "secondary",
+        "displayName": "Creme profundo"
+      },
+      "paper": {
+        "role": "secondary",
+        "displayName": "Papel"
+      },
+      "coral": {
+        "role": "tertiary",
+        "displayName": "Coral"
+      },
+      "coral-deep": {
+        "role": "tertiary",
+        "displayName": "Coral profundo"
+      },
+      "coral-soft": {
+        "role": "tertiary",
+        "displayName": "Coral suave"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Tinta"
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Tinta suave"
+      },
+      "ink-mute": {
+        "role": "neutral",
+        "displayName": "Tinta muda"
+      },
+      "teal-bright": {
+        "role": "primary",
+        "displayName": "Teal brilho"
+      },
+      "coral-hover": {
+        "role": "tertiary",
+        "displayName": "Coral hover"
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Título principal", "purpose": "Títulos com composição editorial." },
-      "serif": { "displayName": "Serifada expressiva", "purpose": "Trechos em destaque e lista de cuidados." },
-      "body": { "displayName": "Texto de apoio", "purpose": "Parágrafos de leitura confortável." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "Títulos grandes em Bricolage, peso 750, stretch 90%."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Títulos de seção."
+      },
+      "title": {
+        "displayName": "Título",
+        "purpose": "Títulos de card."
+      },
+      "subtitle": {
+        "displayName": "Subtítulo",
+        "purpose": "Apoio em Figtree."
+      },
+      "body": {
+        "displayName": "Texto",
+        "purpose": "Parágrafos."
+      },
+      "label": {
+        "displayName": "Rótulo",
+        "purpose": "Navegação e legendas."
+      },
+      "logo-header": {
+        "displayName": "Logo no cabeçalho",
+        "purpose": "Wordmark 1.8rem."
+      },
+      "logo-header-wide": {
+        "displayName": "Logo no cabeçalho largo",
+        "purpose": "Wordmark 2.1rem a partir de 900px."
+      },
+      "logo-hero": {
+        "displayName": "Logo do hero",
+        "purpose": "Wordmark gigante min(26vw, 33svh)."
+      },
+      "logo-footer": {
+        "displayName": "Logo do rodapé",
+        "purpose": "Wordmark clamp(5rem, 18vw, 15rem)."
+      }
     },
     "motion": [
-      { "name": "revelação", "value": "cubic-bezier(.16,1,.3,1)", "purpose": "Entrada suave dos retratos e seções." },
-      { "name": "preferência reduzida", "value": "0.01ms", "purpose": "Encurta as animações quando o sistema solicita movimento reduzido." }
+      {
+        "name": "expo-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entradas calmas."
+      },
+      {
+        "name": "in-out",
+        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+        "purpose": "Transições simétricas."
+      },
+      {
+        "name": "back",
+        "value": "cubic-bezier(0.34, 1.4, 0.64, 1)",
+        "purpose": "Overshoot só em toque e hover."
+      },
+      {
+        "name": "rápida",
+        "value": "180ms",
+        "purpose": "Cor e feedback."
+      },
+      {
+        "name": "padrão",
+        "value": "320ms",
+        "purpose": "Hover e botões."
+      },
+      {
+        "name": "lenta",
+        "value": "760ms",
+        "purpose": "Reveals de entrada."
+      },
+      {
+        "name": "preferência reduzida",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Encurta ou remove animações."
+      }
     ],
     "breakpoints": [
-      { "name": "tablet", "value": "900px" },
-      { "name": "mobile", "value": "650px" }
+      {
+        "name": "mobile-s",
+        "value": "420px"
+      },
+      {
+        "name": "mobile",
+        "value": "700px"
+      },
+      {
+        "name": "tablet",
+        "value": "900px"
+      },
+      {
+        "name": "desktop",
+        "value": "960px"
+      }
     ]
   },
   "components": [
     {
-      "name": "Link de ação",
+      "name": "Botão primário",
       "kind": "button",
-      "refersTo": "link-line",
-      "description": "Link editorial sublinhado com resposta no hover.",
-      "html": "<a class=\"ds-link\" href=\"#\">Conheça a Lúmina <svg aria-hidden=\"true\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a>",
-      "css": ".ds-link{display:inline-flex;align-items:center;gap:32px;color:#f5f1e9;text-decoration:none;text-transform:uppercase;font:700 10px Manrope,sans-serif;letter-spacing:.08em;border-bottom:1px solid #dec4a0;padding-bottom:12px;transition:gap .3s,color .3s}.ds-link:hover{gap:45px;color:#dec4a0}.ds-link:focus-visible{outline:2px solid #ddbd91;outline-offset:5px}"
+      "refersTo": "button-primary",
+      "description": "Pílula coral com texto tinta.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Agendar consulta</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;min-height:48px;padding:.8em 1.35em;border-radius:999px;background:#ff6845;color:#102b28;font:700 1.0625rem 'Figtree',sans-serif;text-decoration:none;line-height:1;transition:transform .32s cubic-bezier(.34,1.4,.64,1),background-color .18s linear}.ds-btn:hover{background:#ff7c5e}.ds-btn:active{transform:scale(.96)}.ds-btn:focus-visible{outline:3px solid #ff6845;outline-offset:3px}"
     },
     {
-      "name": "Opção de cuidado",
+      "name": "Botão teal",
       "kind": "button",
-      "description": "Linha interativa da lista de cuidados.",
-      "html": "<button class=\"ds-care\" type=\"button\">Prevenção <svg aria-hidden=\"true\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></button>",
-      "css": ".ds-care{width:100%;color:#edeae4;background:#292a2e;border:0;border-bottom:1px solid #ffffff35;padding:25px 12px 25px 0;text-align:left;display:flex;align-items:center;gap:28px;font:400 32px 'Cormorant Garamond',serif;cursor:pointer;transition:padding .4s,color .4s}.ds-care svg{margin-left:auto}.ds-care:hover{padding-left:15px;color:#dec4a0}.ds-care:focus-visible{outline:2px solid #ddbd91;outline-offset:5px}"
+      "refersTo": "button-teal",
+      "description": "Pílula teal com texto creme.",
+      "html": "<a class=\"ds-btn-teal\" href=\"#\">Conhecer os cuidados</a>",
+      "css": ".ds-btn-teal{display:inline-flex;align-items:center;min-height:48px;padding:.8em 1.35em;border-radius:999px;background:#17645f;color:#f3eee8;font:700 1.0625rem 'Figtree',sans-serif;text-decoration:none;line-height:1;transition:background-color .18s linear}.ds-btn-teal:hover{background:#0e4a46}.ds-btn-teal:focus-visible{outline:3px solid #ff6845;outline-offset:3px}"
+    },
+    {
+      "name": "Pílula do cabeçalho",
+      "kind": "navigation",
+      "refersTo": "header-pill",
+      "description": "Barra flutuante em papel a 92%.",
+      "html": "<nav class=\"ds-pill\"><a href=\"#\">Cuidados</a><a href=\"#\">Espaço</a><a href=\"#\">Contato</a></nav>",
+      "css": ".ds-pill{display:inline-flex;gap:.5rem;padding:.4rem;border-radius:999px;background:rgb(250 247 243 / .92);box-shadow:0 18px 40px -20px rgb(10 52 49 / .35)}.ds-pill a{padding:.5rem 1rem;border-radius:999px;color:#102b28;font:600 .9rem 'Figtree',sans-serif;text-decoration:none}.ds-pill a:hover{background:#d6e6e1}.ds-pill a:focus-visible{outline:3px solid #ff6845;outline-offset:3px}"
+    },
+    {
+      "name": "Card teal",
+      "kind": "card",
+      "refersTo": "card-teal",
+      "description": "Card arredondado teal.",
+      "html": "<div class=\"ds-card\"><h3>Primeira consulta</h3><p>Uma conversa sem pressa.</p></div>",
+      "css": ".ds-card{padding:2rem;border-radius:44px;background:#17645f;color:#f3eee8;font-family:'Figtree',sans-serif}.ds-card h3{margin:0 0 .5rem;font:700 1.6rem 'Bricolage Grotesque',sans-serif;letter-spacing:-.03em}"
+    },
+    {
+      "name": "Foto em arco",
+      "kind": "card",
+      "refersTo": "photo-arch",
+      "description": "Janela de dente para fotografias.",
+      "html": "<div class=\"ds-arch\"></div>",
+      "css": ".ds-arch{width:240px;height:320px;background:#d6e6e1;border-radius:999px 999px 24px 24px;box-shadow:0 0 0 8px #f3eee8}"
     }
   ],
   "narrative": {
-    "northStar": "Editorial acolhedor",
-    "overview": "Composição editorial, contraste tipográfico e fotografia humana em uma paleta de grafite e areia.",
-    "keyCharacteristics": ["Retratos assimétricos", "Contraste entre sans-serif e serifada", "Superfícies planas e respiro generoso"],
-    "rules": [],
-    "dos": ["Manter foco visível e contraste legível.", "Respeitar movimento reduzido."],
-    "donts": ["Apresentar dados de atendimento fictícios como reais."]
+    "northStar": "Precisão acolhedora",
+    "overview": "Teal, creme e coral com tipografia justa, arcos de dente, wordmark extrudado e movimento calmo.",
+    "keyCharacteristics": [
+      "Arco como forma-assinatura",
+      "Wordmark extrudado com sorriso",
+      "Cards teal arredondados",
+      "Pílulas, traços à mão, marquee e cursor"
+    ],
+    "rules": [
+      "Texto sobre coral é sempre tinta.",
+      "Coral em texto sobre fundo claro usa coral profundo.",
+      "Sem eyebrow ou kicker."
+    ],
+    "dos": [
+      "Usar ink sobre coral e creme sobre teal.",
+      "Respeitar prefers-reduced-motion.",
+      "Manter foco visível."
+    ],
+    "donts": [
+      "Creme sobre coral.",
+      "Inventar dados da clínica.",
+      "Eyebrow ou kicker.",
+      "Cinza neutro."
+    ]
   }
 }

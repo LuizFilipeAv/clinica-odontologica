@@ -1,0 +1,101 @@
+.journey {
+  background: var(--cream);
+  padding: var(--section) 0;
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
+  overflow-x: clip;
+}
+
+.head {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 44rem;
+  margin-bottom: clamp(3rem, 2rem + 4vw, 6rem);
+}
+.title { max-width: 13ch; }
+.intro { color: var(--ink-soft); max-width: 46ch; }
+
+/* ---------- thread ---------- */
+.track { position: relative; }
+.thread {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.threadDesk { display: none; left: 0; width: 100%; }
+.threadMob { left: 0; width: 28px; }
+
+.rail, .line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.rail { stroke: var(--teal); stroke-opacity: 0.25; stroke-width: 2; stroke-dasharray: 2 9; }
+.line { stroke: var(--teal); stroke-width: 3; clip-path: inset(0 0 var(--reveal, 0%) 0); }
+
+.steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: 1fr;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 0 1.25rem 3.5rem;
+}
+
+.node {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 3px solid var(--teal);
+  transition: background-color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out), transform var(--dur) var(--ease-back);
+  z-index: 1;
+}
+.node.on {
+  background: var(--coral);
+  border-color: var(--coral);
+  transform: scale(1.25);
+}
+
+.card { max-width: 30rem; }
+.icon { width: 44px; height: 44px; color: var(--teal); margin-bottom: 0.75rem; }
+.stepTitle {
+  font-size: var(--step-2);
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  margin-bottom: 0.6rem;
+}
+.card p { color: var(--ink-soft); }
+
+.cta { display: flex; justify-content: center; margin-top: clamp(2.5rem, 2rem + 3vw, 5rem); }
+
+@media (min-width: 900px) {
+  .threadMob { display: none; }
+  .threadDesk { display: block; }
+  .steps { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .step { padding: 1.5rem 0; }
+  .node { width: 26px; height: 26px; margin: -13px 0 0 -13px; }
+  /* every step owns a row, so the four nodes land on the thread at 12.5/37.5/62.5/87.5% */
+  .step:nth-child(1) { grid-row: 1; } .step:nth-child(2) { grid-row: 2; }
+  .step:nth-child(3) { grid-row: 3; } .step:nth-child(4) { grid-row: 4; }
+  .step:nth-child(odd) .node { left: 100%; }
+  .step:nth-child(even) .node { left: 0; }
+
+  /* odd steps sit left of the thread, even steps right */
+  .step:nth-child(odd) { grid-column: 1; justify-content: flex-end; padding-right: clamp(3rem, 2rem + 4vw, 6rem); text-align: right; }
+  .step:nth-child(even) { grid-column: 2; justify-content: flex-start; padding-left: clamp(3rem, 2rem + 4vw, 6rem); }
+  .step:nth-child(odd) .icon { margin-left: auto; }
+}
